@@ -16,12 +16,11 @@ function onInputSearch(event) {
   if (input === '') {
     return;
   } else {
-    fetchCountries(input).then(countries => {
-      createCountriesMarkup(countries);
-    });
-    // .catch(
-    //   Notiflix.Notify.failure('Oops, there is no country with that name')
-    // );
+    fetchCountries(input)
+      .then(countries => createCountriesMarkup(countries))
+      .catch(
+        Notiflix.Notify.failure('Oops, there is no country with that name')
+      );
   }
 }
 
