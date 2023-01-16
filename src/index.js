@@ -17,8 +17,14 @@ function onInputSearch(event) {
     return;
   } else {
     fetchCountries(input)
-      .then(countries => createCountriesMarkup(countries))
-      .catch(
+      .then(response => {
+        if (response.status === 404) {
+          throw new Error();
+        } else {
+          createCountriesMarkup(response);
+        }
+      })
+      .catch(error =>
         Notiflix.Notify.failure('Oops, there is no country with that name')
       );
   }
