@@ -13,20 +13,20 @@ inputHandle.addEventListener('input', debounce(onInputSearch, DEBOUNCE_DELAY));
 function onInputSearch(event) {
   event.preventDefault();
   const input = inputHandle.value.trim();
-  if (input === '') {
-    return;
-  } else {
+  if (input != '') {
     fetchCountries(input)
       .then(response => {
         if (response.status === 404) {
-          throw new Error();
+          throw new Error('404');
         } else {
           createCountriesMarkup(response);
         }
       })
-      .catch(error =>
-        Notiflix.Notify.failure('Oops, there is no country with that name')
-      );
+      .catch(error => {
+        if (error.message === '404') {
+          Notiflix.Notify.failure('Oops, there is no country with that name');
+        }
+      });
   }
 }
 
