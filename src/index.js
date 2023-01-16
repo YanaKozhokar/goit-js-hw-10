@@ -6,7 +6,6 @@ import fetchCountries from './fetchCountries';
 
 const inputHandle = document.querySelector('#search-box');
 const countryListRef = document.querySelector('.country-list');
-const countryInfoRef = document.querySelectorAll('.country-info');
 const DEBOUNCE_DELAY = 300;
 
 inputHandle.addEventListener('input', debounce(onInputSearch, DEBOUNCE_DELAY));
@@ -27,32 +26,34 @@ function onInputSearch(event) {
 }
 
 function createCountriesMarkup(countries) {
-  // countryInfoRef.remove();
+  countryListRef.innerHTML = '';
   if (countries.length === 1) {
     countries.map(country => {
-      const markup = `<div class="country-info">
-      <div>
-        <svg width="30" height="20">
-          <use href="${country.flags.svg}"></use>
-         </svg>
-         <p>${country.name.official}</p>
-      </div>
-      <p>Capital: ${country.capital}</p>
-      <p>Population: ${country.population}</p>
-      <p>Languages: ${Object.values(country.languages)}</p>
-    </div>`;
+      const markup = `<li class="country-info">
+        <div class="country-name-container">
+          <img src='${country.flags.svg}' alt='flag' width="50" height="30">
+          <p class="country-name-main">${country.name.official}</p>
+        </div>
+        <p class="country-characteristics"><span class="country-characteristics-value">Capital:</span> ${
+          country.capital
+        }</p>
+        <p class="country-characteristics"><span class="country-characteristics-value">Population:</span> ${
+          country.population
+        }</p>
+        <p class="country-characteristics"><span class="country-characteristics-value">Languages:</span> ${Object.values(
+          country.languages
+        )}</p>
+      </li>`;
       countryListRef.insertAdjacentHTML('beforeend', markup);
     });
   } else if (countries.length < 10) {
     countries.map(country => {
-      const markup = `<div class="country-info">
-      <div>
-        <svg width="30" height="20">
-          <use href="${country.flags.svg}"></use>
-         </svg>
-         <p>${country.name.official}</p>
-      </div>
-    </div>`;
+      const markup = `<li class="country-info">
+        <div class="country-name-container">
+          <img src='${country.flags.svg}' alt='flag' width="40" height="25">
+          <p class="country-name">${country.name.official}</p>
+        </div>
+      </li>`;
       countryListRef.insertAdjacentHTML('beforeend', markup);
     });
   } else if (countries.length >= 10) {

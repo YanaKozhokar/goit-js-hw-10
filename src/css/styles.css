@@ -16,5 +16,41 @@ body {
   font: inherit;
   padding: 8px;
   max-width: 320px;
+  margin-bottom: 20px;
+}
+
+ul,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.country-info {
+  margin-bottom: 10px;
+}
+
+.country-name-container {
+  display: flex;
+  align-items: center;
   margin-bottom: 16px;
+}
+
+.country-name-main {
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.country-name {
+  margin-left: 10px;
+  font-size: 17px;
+}
+
+.country-characteristics {
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.country-characteristics-value {
+  font-weight: 600;
 }
