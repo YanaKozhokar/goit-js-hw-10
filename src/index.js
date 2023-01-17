@@ -12,6 +12,7 @@ inputHandle.addEventListener('input', debounce(onInputSearch, DEBOUNCE_DELAY));
 
 function onInputSearch(event) {
   event.preventDefault();
+  countryListRef.innerHTML = '';
   const input = inputHandle.value.trim();
   if (input != '') {
     fetchCountries(input)
@@ -31,7 +32,6 @@ function onInputSearch(event) {
 }
 
 function createCountriesMarkup(countries) {
-  countryListRef.innerHTML = '';
   if (countries.length === 1) {
     countries.map(country => {
       const markup = `<li class="country-info">
